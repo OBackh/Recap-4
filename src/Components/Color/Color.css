@@ -8,6 +8,8 @@
   padding: 2px 6px;
   background: black;
   color: white;
+  border-radius: 5px;
+  margin: 5px;
 }
 
 .warning {
@@ -16,7 +18,28 @@
   color: black;
   padding: 4px;
 }
-.colorButtons {
+.colorFieldButtons {
   display: flex;
   justify-content: space-between;
+}
+
+.colorButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.no {
+  background-color: red;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.yes {
+  background-color: rgb(30, 154, 30);
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
 }

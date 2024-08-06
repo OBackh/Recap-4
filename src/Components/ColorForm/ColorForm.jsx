@@ -7,6 +7,7 @@ export default function ColorForm({
   initialData = { role: "some color", hex: "#00ff00", contrastText: "#ffffff" },
   colorFieldData,
   changeButtonText,
+  chooseEdit,
   setChooseEdit,
 }) {
   const data = colorFieldData || initialData;
@@ -24,7 +25,12 @@ export default function ColorForm({
     <>
       <form className="colorForm" onSubmit={handleSubmit}>
         <fieldset className="colorPicker">
-          <legend className="legend">Adjust Theme-Color</legend>
+          {chooseEdit ? (
+            <legend className="legend">Adjust current Color</legend>
+          ) : (
+            <legend className="legend">Adjust new Color</legend>
+          )}
+
           <div>
             <label htmlFor="role">Role</label>
             <br />
@@ -44,17 +50,15 @@ export default function ColorForm({
               name="contrastText"
               defaultValue={data.contrastText}
             />
+            <br />
+            <br />
           </div>
           {changeButtonText ? (
             <div className="editForm">
-              <p>
-                <br />
-                <button type="button" onClick={() => setChooseEdit(false)}>
-                  CANCEL
-                </button>
-                &nbsp;
-                <button type="submit">UPDATE COLOR</button>
-              </p>
+              <button type="submit">UPDATE COLOR</button>
+              <button type="button" onClick={() => setChooseEdit(false)}>
+                CANCEL
+              </button>
             </div>
           ) : (
             <>

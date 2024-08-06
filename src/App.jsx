@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onSubmitColor={handleColorSubmit} />
+      <ColorForm onSubmitColor={handleColorSubmit} chooseEdit={false} />
       {colors.length > 0 ? (
         colors.map((color) => {
           return (

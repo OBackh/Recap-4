@@ -18,9 +18,15 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
       <p>contrast: {color.contrastText}</p>
       {confirmDelete ? (
         <div className="colorButtons">
-          <span className="color-card-highlight">Wirklich löschen?</span>
-          <button onClick={() => setConfirmDelete(false)}>Cancel</button>
-          <button onClick={() => onDeleteColor(color.id)}>DELETE</button>
+          <span className="color-card-highlight">
+            Sure to delete the current color?
+          </span>
+          <button className="no" onClick={() => setConfirmDelete(false)}>
+            No
+          </button>
+          <button className="yes" onClick={() => onDeleteColor(color.id)}>
+            Yes
+          </button>
         </div>
       ) : (
         <>
@@ -37,11 +43,12 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
                   hex: color.hex,
                   contrastText: color.contrastText,
                 }}
+                chooseEdit={chooseEdit}
                 setChooseEdit={setChooseEdit}
               />
             </>
           ) : (
-            <div className="colorButtons">
+            <div className="colorFieldButtons">
               <button onClick={() => setChooseEdit(true)}>EDIT</button>
               <button onClick={() => setConfirmDelete(true)}>DELETE</button>
             </div>
