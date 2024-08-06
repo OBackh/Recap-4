@@ -5,7 +5,11 @@ import { uid } from "uid";
 export default function ColorForm({
   onSubmitColor,
   initialData = { role: "some color", hex: "#00ff00", contrastText: "#ffffff" },
+  colorFieldData,
+  changeButtonText,
+  setChooseEdit,
 }) {
+  const data = colorFieldData || initialData;
   const id = uid();
 
   function handleSubmit(event) {
@@ -18,38 +22,45 @@ export default function ColorForm({
 
   return (
     <>
-      <form className="color-form" onSubmit={handleSubmit}>
+      <form className="colorForm" onSubmit={handleSubmit}>
         <fieldset className="colorPicker">
-          <legend className="legend">Color-Form Component</legend>
+          <legend className="legend">Adjust Theme-Color</legend>
           <div>
             <label htmlFor="role">Role</label>
             <br />
-            <input
-              type="text"
-              id="role"
-              name="role"
-              defaultValue={initialData.role}
-            />
+            <input type="text" id="role" name="role" defaultValue={data.role} />
           </div>
-
           <div>
             <label htmlFor="hex">Hex</label>
             <br />
 
-            <ColorInput id="hex" name="hex" defaultValue={initialData.hex} />
+            <ColorInput id="hex" name="hex" defaultValue={data.hex} />
           </div>
-
           <div>
             <label htmlFor="contrastText">Contrast Text</label>
             <br />
             <ColorInput
               id="contrastText"
               name="contrastText"
-              defaultValue={initialData.contrastText}
+              defaultValue={data.contrastText}
             />
           </div>
-
-          <button type="submit">ADD COLOR</button>
+          {changeButtonText ? (
+            <div className="editForm">
+              <p>
+                <br />
+                <button type="button" onClick={() => setChooseEdit(false)}>
+                  CANCEL
+                </button>
+                &nbsp;
+                <button type="submit">UPDATE COLOR</button>
+              </p>
+            </div>
+          ) : (
+            <>
+              <button type="submit">ADD COLOR</button>
+            </>
+          )}
         </fieldset>
       </form>
     </>
