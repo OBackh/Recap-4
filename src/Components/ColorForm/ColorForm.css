@@ -1,2 +1,10 @@
-/* Thats the ColorForm.css
+/* Thats the ColorForm.css */
 
+.colorPicker {
+  background-color: rgb(185, 185, 185);
+}
+
+.legend {
+  border: 1px solid black;
+  background-color: gray;
+}
