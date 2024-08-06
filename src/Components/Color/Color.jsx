@@ -1,8 +1,10 @@
 import "./Color.css";
 import { useState } from "react";
+import ColorForm from "../ColorForm/ColorForm";
 
 export default function Color({ color, onDeleteColor }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [chooseEdit, setChooseEdit] = useState(false);
 
   return (
     <div
@@ -21,7 +23,26 @@ export default function Color({ color, onDeleteColor }) {
           <button onClick={() => onDeleteColor(color.id)}>DELETE</button>
         </>
       ) : (
-        <button onClick={() => setConfirmDelete(true)}>DELETE</button>
+        <>
+          {chooseEdit ? (
+            <>
+              <ColorForm
+                changeButtonText="1"
+                colorFieldData={{
+                  role: color.role,
+                  hex: color.hex,
+                  contrastText: color.contrastText,
+                }}
+                setChooseEdit={setChooseEdit}
+              />
+            </>
+          ) : (
+            <>
+              <button onClick={() => setConfirmDelete(true)}>DELETE</button>
+              <button onClick={() => setChooseEdit(true)}>EDIT</button>
+            </>
+          )}
+        </>
       )}
     </div>
   );
