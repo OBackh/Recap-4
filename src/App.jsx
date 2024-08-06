@@ -20,15 +20,21 @@ function App() {
     <>
       <h1>Theme Creator</h1>
       <ColorForm onSubmitColor={handleColorSubmit} />
-      {colors.map((color) => {
-        return (
-          <Color
-            key={color.id}
-            color={color}
-            onDeleteColor={handleDeleteColor}
-          />
-        );
-      })}
+      {colors.length > 0 ? (
+        colors.map((color) => {
+          return (
+            <Color
+              key={color.id}
+              color={color}
+              onDeleteColor={handleDeleteColor}
+            />
+          );
+        })
+      ) : (
+        <p className="warning">
+          Keine Farben vorhanden. Bitte erstellen Sie neue Farben.
+        </p>
+      )}
     </>
   );
 }

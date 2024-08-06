@@ -18,9 +18,9 @@ export default function ColorForm({
 
   return (
     <>
-      <form className="color-form" onSubmit={handleSubmit}>
+      <form className="colorForm" onSubmit={handleSubmit}>
         <fieldset className="colorPicker">
-          <legend className="legend">Color-Form Component</legend>
+          <legend className="legend">Create a new Theme-Color</legend>
           <div>
             <label htmlFor="role">Role</label>
             <br />
