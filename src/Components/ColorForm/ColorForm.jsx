@@ -46,12 +46,16 @@ export default function ColorForm({
             />
           </div>
           {changeButtonText ? (
-            <>
-              <button type="submit">UPDATE COLOR</button>
-              <button type="button" onClick={() => setChooseEdit(false)}>
-                CANCEL
-              </button>
-            </>
+            <div className="editForm">
+              <p>
+                <br />
+                <button type="button" onClick={() => setChooseEdit(false)}>
+                  CANCEL
+                </button>
+                &nbsp;
+                <button type="submit">UPDATE COLOR</button>
+              </p>
+            </div>
           ) : (
             <>
               <button type="submit">ADD COLOR</button>

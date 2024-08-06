@@ -2,7 +2,7 @@ import "./Color.css";
 import { useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 
-export default function Color({ color, onDeleteColor }) {
+export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [chooseEdit, setChooseEdit] = useState(false);
 
@@ -27,6 +27,10 @@ export default function Color({ color, onDeleteColor }) {
           {chooseEdit ? (
             <>
               <ColorForm
+                onSubmitColor={(updatedColor) => {
+                  onUpdateColor(color.id, updatedColor);
+                  setChooseEdit(false);
+                }}
                 changeButtonText="1"
                 colorFieldData={{
                   role: color.role,

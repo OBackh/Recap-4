@@ -17,3 +17,8 @@
   margin: 0px 10px;
   padding: 0px;
 }
+
+.editForm {
+  display: flex;
+  justify-content: flex-end;
+}
