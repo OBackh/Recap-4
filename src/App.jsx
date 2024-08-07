@@ -2,11 +2,22 @@ import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import "./App.css";
 import ColorForm from "./Components/ColorForm/ColorForm";
-import { useState } from "react";
+//import { useState } from "react";
+//import { useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [colors, setColors] = useState(initialColors);
-  console.log("Submit wurde ausgeführt:", colors);
+  //const [count, setCount] = useLocalStorageState("count", { defaultValue: 0 });
+  //setCount(2);
+  //---------------------------------------------------------
+
+  //const [colors, setColors] = useState(initialColors);
+  //console.log("Submit wurde ausgeführt:", colors);
+
+  const [colors, setColors] = useLocalStorageState("Colors", {
+    defaultValue: initialColors,
+  });
+  console.log("Aktuelle Farben:", colors);
 
   function handleColorSubmit(newColor) {
     setColors((prevColors) => [newColor, ...prevColors]);
