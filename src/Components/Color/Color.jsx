@@ -1,11 +1,39 @@
 import "./Color.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ColorForm from "../ColorForm/ColorForm";
-import CopyToClipBoard from "../CopyToClipboard/CopyToClipboard";
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
+import styled from "styled-components";
+
+const ColorCardHeadline = styled.h3`
+  margin: 0;
+  & > button {
+    font-weight: normal;
+  }
+`;
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [chooseEdit, setChooseEdit] = useState(false);
+  const [copyStatus, setCopyStatus] = useState("COPY");
+
+  // Use useEffect to handle the timeout for resetting the copy status
+  useEffect(() => {
+    let timer;
+    if (copyStatus === "Successfully copied!") {
+      timer = setTimeout(() => setCopyStatus("COPY"), 3000); // Setzt den Text nach 3 Sekunden zurück
+    }
+    return () => clearTimeout(timer); // Cleanup the timer if component unmounts or status changes
+  }, [copyStatus]);
+
+  const handleCopy = async () => {
+    const success = await CopyToClipboard(color.hex);
+    if (success) {
+      setCopyStatus("Successfully copied!");
+      console.log("Hex-Code successfully copied to clipboard.", success);
+    } else {
+      setCopyStatus("Failed to copy Hex-Code to clipboard!", success);
+    }
+  };
 
   return (
     <div
@@ -14,10 +42,10 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         background: color.hex,
         color: color.contrastText,
       }}>
-      <h3 className="color-card-headline">
+      <ColorCardHeadline className="color-card-headline">
         {color.hex}
-        <button onClick={() => CopyToClipboard(color.hex)}>COPY</button>
-      </h3>
+        <button onClick={handleCopy}>{copyStatus}</button>
+      </ColorCardHeadline>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
       {confirmDelete ? (
