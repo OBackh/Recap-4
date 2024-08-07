@@ -7,13 +7,6 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  //const [count, setCount] = useLocalStorageState("count", { defaultValue: 0 });
-  //setCount(2);
-  //---------------------------------------------------------
-
-  //const [colors, setColors] = useState(initialColors);
-  //console.log("Submit wurde ausgeführt:", colors);
-
   const [colors, setColors] = useLocalStorageState("Colors", {
     defaultValue: initialColors,
   });
@@ -47,6 +40,7 @@ function App() {
               color={color}
               onDeleteColor={handleDeleteColor}
               onUpdateColor={handleUpdateColor}
+              onCopySuccess={() => setConfirmCopy("Successfully copied!")}
             />
           );
         })
