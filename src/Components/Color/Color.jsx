@@ -4,7 +4,7 @@ import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 import styled from "styled-components";
 
-const ColorCardHeadline = styled.h3`
+const StyledColorCardHeadline = styled.h3`
   margin: 0;
   & > button {
     font-weight: normal;
@@ -42,10 +42,10 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         background: color.hex,
         color: color.contrastText,
       }}>
-      <ColorCardHeadline className="color-card-headline">
+      <StyledColorCardHeadline className="color-card-headline">
         {color.hex}
         <button onClick={handleCopy}>{copyStatus}</button>
-      </ColorCardHeadline>
+      </StyledColorCardHeadline>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
       {confirmDelete ? (
@@ -69,12 +69,12 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
                   onUpdateColor(color.id, updatedColor);
                   setChooseEdit(false);
                 }}
-                changeButtonText="1"
                 colorFieldData={{
                   role: color.role,
                   hex: color.hex,
                   contrastText: color.contrastText,
                 }}
+                buttonText="UPDATE COLOR"
                 chooseEdit={chooseEdit}
                 setChooseEdit={setChooseEdit}
               />
