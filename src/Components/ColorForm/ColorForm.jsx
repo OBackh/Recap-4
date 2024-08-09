@@ -9,6 +9,7 @@ export default function ColorForm({
   chooseEdit,
   setChooseEdit,
   buttonText,
+  // setScore,
 }) {
   const data = colorFieldData || initialData;
   const id = uid();
@@ -18,6 +19,19 @@ export default function ColorForm({
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     const dataWithId = { id, ...data };
+    // const hex = data.hex;
+    // const contrastText = data.contrastText;
+
+    // Abrufen der aktuellen Farbwerte
+    console.log(
+      "Form submits: Hex=",
+      data.hex,
+      "and ContrastText=",
+      data.contrastText
+    );
+    // Aufruf von ColorCheck mit den aktuellen Farbwerten
+    // ColorCheck(hex, contrastText, setScore);
+
     onSubmitColor(dataWithId);
   }
 

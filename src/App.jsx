@@ -7,10 +7,14 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import useLocalStorageState from "use-local-storage-state";
 
 function App() {
+  const [score, setScore] = useLocalStorageState("score", {
+    defaultvalue: "Still checking...",
+  });
+
   const [colors, setColors] = useLocalStorageState("Colors", {
     defaultValue: initialColors,
   });
-  console.log("Aktuelle Farben:", colors);
+  console.log("Aktuelle Farben im localStorage:", colors);
 
   function handleColorSubmit(newColor) {
     setColors((prevColors) => [newColor, ...prevColors]);
@@ -35,6 +39,8 @@ function App() {
         onSubmitColor={handleColorSubmit}
         chooseEdit={false}
         buttonText="ADD COLOR"
+        setScore={setScore}
+        score
       />
       {colors.length > 0 ? (
         colors.map((color) => {
@@ -42,9 +48,13 @@ function App() {
             <Color
               key={color.id}
               color={color}
+              hex={color.hex}
+              contrastText={color.contrastText}
               onDeleteColor={handleDeleteColor}
               onUpdateColor={handleUpdateColor}
-              onCopySuccess={() => setConfirmCopy("Successfully copied!")}
+              //onCopySuccess={() => setConfirmCopy("Successfully copied!")}
+              score={score}
+              setScore={setScore}
             />
           );
         })

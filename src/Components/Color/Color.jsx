@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 import styled from "styled-components";
+import ColorCheck from "../ColorCheck/ColorCheck";
 
 const StyledColorCardHeadline = styled.h3`
   margin: 0;
@@ -11,7 +12,16 @@ const StyledColorCardHeadline = styled.h3`
   }
 `;
 
-export default function Color({ color, onDeleteColor, onUpdateColor }) {
+export default function Color({
+  color,
+  //hex,
+  //contrastText,
+  onDeleteColor,
+  onUpdateColor,
+  score,
+}) {
+  console.log("COLOR:", color);
+
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [chooseEdit, setChooseEdit] = useState(false);
   const [copyStatus, setCopyStatus] = useState("COPY");
@@ -44,10 +54,18 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
       }}>
       <StyledColorCardHeadline className="color-card-headline">
         {color.hex}
-        <button onClick={handleCopy}>{copyStatus}</button>
+        <button
+          onClick={handleCopy}
+          style={{ marginLeft: "5px" }} // 5px Abstand hinzufügen
+        >
+          {copyStatus}
+        </button>
       </StyledColorCardHeadline>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+      <ColorCheck color={color} />
+      {/* <a className="contrastScore">Overall Contrast Score: {score}</a> */}
+
       {confirmDelete ? (
         <div className="colorButtons">
           <span className="color-card-highlight">
