@@ -43,3 +43,8 @@
   border-radius: 5px;
   margin: 5px;
 }
+
+.contrastScore {
+  background-color: rgb(3, 151, 3);
+  color: black;
+}

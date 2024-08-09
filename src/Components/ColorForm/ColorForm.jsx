@@ -6,9 +6,10 @@ export default function ColorForm({
   onSubmitColor,
   initialData = { role: "some color", hex: "#00ff00", contrastText: "#ffffff" },
   colorFieldData,
-  changeButtonText,
   chooseEdit,
   setChooseEdit,
+  buttonText,
+  // setScore,
 }) {
   const data = colorFieldData || initialData;
   const id = uid();
@@ -18,6 +19,19 @@ export default function ColorForm({
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     const dataWithId = { id, ...data };
+    // const hex = data.hex;
+    // const contrastText = data.contrastText;
+
+    // Abrufen der aktuellen Farbwerte
+    console.log(
+      "Form submits: Hex=",
+      data.hex,
+      "and ContrastText=",
+      data.contrastText
+    );
+    // Aufruf von ColorCheck mit den aktuellen Farbwerten
+    // ColorCheck(hex, contrastText, setScore);
+
     onSubmitColor(dataWithId);
   }
 
@@ -30,7 +44,6 @@ export default function ColorForm({
           ) : (
             <legend className="legend">Adjust new Color</legend>
           )}
-
           <div>
             <label htmlFor="role">Role</label>
             <br />
@@ -53,18 +66,12 @@ export default function ColorForm({
             <br />
             <br />
           </div>
-          {changeButtonText ? (
-            <div className="editForm">
-              <button type="submit">UPDATE COLOR</button>
-              <button type="button" onClick={() => setChooseEdit(false)}>
-                CANCEL
-              </button>
-            </div>
-          ) : (
-            <>
-              <button type="submit">ADD COLOR</button>
-            </>
-          )}
+          <div className="editForm">
+            <button type="submit">{buttonText}</button>
+            <button type="button" onClick={() => setChooseEdit(false)}>
+              CANCEL
+            </button>
+          </div>
         </fieldset>
       </form>
     </>
